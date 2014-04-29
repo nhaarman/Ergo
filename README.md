@@ -12,6 +12,14 @@ Ergo provides a way of executing these tasks using `IntentService`s and `ResultR
 Usage
 ---
 
+Add the following to your `build.gradle`:
+
+```groovy
+dependencies {
+    compile 'com.nhaarman.ergo:library:0.1.+'
+}
+```
+
 - Extend `ErgoService`
   - Implement `createTask(Intent)`
 - Extend `ErgoActivity`
@@ -38,4 +46,4 @@ License
 	limitations under the License.
 
 ---
-έργο is Greek for 'task'.
+_έργο is Greek for 'task'._
