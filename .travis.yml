@@ -1,0 +1,43 @@
+language: java
+jdk: oraclejdk7
+
+env:
+  matrix:
+    - ANDROID_SDKS=sysimg-19 ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a SKIN=WXGA800 LINT=true
+  global:
+    - TERM=dumb
+    # NEXUS_USERNAME:
+    - secure: qtGy52AvipnoacDVSUA5X6LM7dvIS44NPPuSuUeMUg2+r9doydmhI9TumhrwmMoz9cc1Gw8fFICxbFvm6NW4RhRn4rGmu6jN87dZMMfZPpkl4oeAjVC4X2PRrbfrXjwvS+PY5KqoQjbGdplm+zVttiMMbHDUuDQtXsuMm9iOD9g=
+    # NEXUS_PASSWORD:
+    - secure: Qqxrf7crRvhJlAb4qcYPpgu7RHfvU87KvD+POdAXwE7yF+qqRB0kA/rB6Uplenn4hmn81hoahLM5nKMFxdxJNLAPXs3Lxe5xN5zc4PkNhrD0tq/feJEucrORrdcmPWI9bCWmV0RZ8eIqs3s5KQwCgy8tnn8rdq/e8limYJ/We0k=
+
+before_install:
+  # Install base Android SDK
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq libstdc++6:i386 lib32z1 expect
+  - export COMPONENTS=extra-android-m2repository,build-tools-19.0.3,android-19,$ANDROID_SDKS
+  - curl -3L https://raw.github.com/embarkmobile/android-sdk-installer/version-2/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS
+  - source ~/.android-sdk-installer/env
+
+  # Create and start emulator
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI --skin $SKIN
+  - emulator -avd test -no-audio -no-window &
+
+before_script:
+  # Make sure the emulator has started before running tests
+  - wait_for_emulator
+
+install:
+ - true
+
+script:
+  - sudo chmod +x gradlew
+  - ./gradlew connectedCheck
+
+  - if [[ $LINT == 'true' ]]; then ./gradlew lint ; fi
+
+after_success:
+  - ./gradlew uploadArchives -PnexusUsername="${NEXUS_USERNAME}" -PnexusPassword="${NEXUS_PASSWORD}"
+
+notifications:
+  email: false
