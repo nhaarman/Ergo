@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Ergo : A library for easily executing asynchronous tasks using IntentServices" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ergo</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/nhaarman/Ergo">View on GitHub</a>
+
+          <h1 id="project_title">Ergo</h1>
+          <h2 id="project_tagline">A library for easily executing asynchronous tasks using IntentServices</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/nhaarman/Ergo/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/nhaarman/Ergo/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="ergo-experimental-" class="anchor" href="#ergo-experimental-"><span class="octicon octicon-link"></span></a>Ergo (Experimental) <a href="https://travis-ci.org/nhaarman/Ergo"><img src="https://travis-ci.org/nhaarman/Ergo.svg" alt="Build Status"></a>
+</h1>
+
+<p>Ergo is an Android library for easily executing tasks using <code>IntentServices</code>.
+Feel free to use it all you want in your Android apps provided that you cite this project and include the license in your app.</p>
+
+<h2>
+<a name="about" class="anchor" href="#about"><span class="octicon octicon-link"></span></a>About</h2>
+
+<p>Often developers use an <code>AsyncTask</code> for executing tasks such as downloading data. Handling state changes can be a real PITA.<br>
+Ergo provides a way of executing these tasks using <code>IntentService</code>s and <code>ResultReceiver</code>s. State changes are handled by storing the <code>ResultReceiver</code> (which is bound to the <code>IntentService</code>), and binding proper callbacks again.</p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Add the following to your <code>build.gradle</code>:</p>
+
+<div class="highlight highlight-groovy"><pre><span class="n">dependencies</span> <span class="o">{</span>
+    <span class="n">compile</span> <span class="s1">'com.nhaarman.ergo:library:0.1.+'</span>
+<span class="o">}</span>
+</pre></div>
+
+<ul>
+<li>Extend <code>ErgoService</code>
+
+<ul>
+<li>Implement <code>createTask(Intent)</code>
+</li>
+</ul>
+</li>
+<li>Extend <code>ErgoActivity</code>
+
+<ul>
+<li>Implement <code>onCreateReceivers()</code>
+</li>
+<li>Start your <code>ErgoService</code> using <code>ErgoService.startService(Context, Intent, ResultReceiver)</code>
+</li>
+</ul>
+</li>
+</ul><p>A code example will be available soon.</p>
+
+<h2>
+<a name="license" class="anchor" href="#license"><span class="octicon octicon-link"></span></a>License</h2>
+
+<pre><code>Copyright 2014 Niek Haarman
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+</code></pre>
+
+<hr><p><em>έργο is Greek for 'task'.</em></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ergo maintained by <a href="https://github.com/nhaarman">nhaarman</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
