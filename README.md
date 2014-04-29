@@ -1,4 +1,4 @@
-Ergo [![Build Status](https://travis-ci.org/nhaarman/Ergo.svg)](https://travis-ci.org/nhaarman/Ergo)
+Ergo (experimental)[![Build Status](https://travis-ci.org/nhaarman/Ergo.svg)](https://travis-ci.org/nhaarman/Ergo)
 ===
 
 Ergo is an Android library for easily executing tasks using `IntentServices`.
