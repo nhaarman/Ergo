@@ -22,7 +22,7 @@ dependencies {
 
 - Extend `ErgoService`
   - Implement `createTask(Intent)`
-- Extend `ErgoActivity`
+- Extend `ErgoActivity` or `ErgoFragment`
   - Implement `onCreateReceivers()`
   - Start your `ErgoService` using `ErgoService.startService(Context, Intent, ResultReceiver)`
 
