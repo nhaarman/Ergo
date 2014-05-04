@@ -26,6 +26,7 @@ import android.os.ResultReceiver;
  * After that, an {@link InnerResultReceiver} can be gained by calling {@link #createResultReceiverForClass(Class)},
  * which can be used for {@link com.nhaarman.ergo.ErgoService}.
  */
+@SuppressWarnings("rawtypes")
 public class ErgoActivity extends Activity {
 
     private final ErgoHelper mErgoHelper = new ErgoHelper();
@@ -50,7 +51,7 @@ public class ErgoActivity extends Activity {
      * That instance will be the callback class for the ErgoResultReceiver returned.
      * @return an ErgoResultReceiver with the instance for given class as callback.
      */
-    protected ResultReceiver createResultReceiverForClass(final Class<? extends ErgoReceiver<?>> receiverClass) {
+    protected ResultReceiver createResultReceiverForClass(final Class<? extends ErgoReceiver> receiverClass) {
         return mErgoHelper.createResultReceiverForClass(receiverClass);
     }
 
@@ -58,7 +59,7 @@ public class ErgoActivity extends Activity {
      * Returns whether the task for given class is still active.
      * @return true if it is active.
      */
-    protected boolean isActive(final Class<? extends ErgoReceiver<?>> receiverClass) {
+    protected boolean isActive(final Class<? extends ErgoReceiver> receiverClass) {
         return mErgoHelper.isActive(receiverClass);
     }
 
