@@ -16,7 +16,7 @@ Add the following to your `build.gradle`:
 
 ```groovy
 dependencies {
-    compile 'com.nhaarman.ergo:library:0.1.+'
+    compile 'com.nhaarman.ergo:library:0.2.+'
 }
 ```
 
