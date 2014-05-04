@@ -24,21 +24,21 @@ import android.os.Bundle;
  */
 class InnerReceiverWrapper<T> implements InnerReceiver {
 
-    private final ErgoActivity mErgoActivity;
+    private final ErgoHelper mErgoHelper;
     private final ErgoReceiver<T> mErgoReceiver;
 
     /**
      * Creates a new SimpleReceiver.
-     * @param ergoActivity the containing ErgoActivity.
+     * @param ergoHelper the containing ErgoHelper.
      */
-    protected InnerReceiverWrapper(final ErgoActivity ergoActivity, final ErgoReceiver<T> ergoReceiver) {
-        mErgoActivity = ergoActivity;
+    protected InnerReceiverWrapper(final ErgoHelper ergoHelper, final ErgoReceiver<T> ergoReceiver) {
+        mErgoHelper = ergoHelper;
         mErgoReceiver = ergoReceiver;
     }
 
     @Override
     public final void onReceiveResult(final int resultCode, final Bundle resultData) {
-        mErgoActivity.onFinishedForClass(mErgoReceiver.getClass());
+        mErgoHelper.onFinishedForClass(mErgoReceiver.getClass());
         if (ErgoService.isSuccessFul(resultCode)) {
             T result = (T) resultData.getSerializable(ErgoService.EXTRA_RESULT);
             mErgoReceiver.onSuccess(result);

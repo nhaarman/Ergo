@@ -3,7 +3,7 @@ jdk: oraclejdk7
 
 env:
   matrix:
-    - ANDROID_SDKS=sysimg-19 ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a SKIN=WXGA800 LINT=true
+    - ANDROID_SDKS=sysimg-19 ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a SKIN=WXGA800 LINT=true MAVEN=true
   global:
     - TERM=dumb
     - secure: JSu0bJbR+ikwU7AdTfZtPDhTdKPKgdXkNLb3EyNwchJT1+o2/E0JnOi2T/hO+TKkGOv0r0RTcjapxuYOH1cGDy7zMfrHeSElMFyqO7ZjVCOhVH6ndjQrisqSUNMNZa39SDNH195DzGb9g160hWuK3cKWxHw6+m6wT11GHCeWN5I=
@@ -35,7 +35,7 @@ script:
   - if [[ $LINT == 'true' ]]; then ./gradlew lint ; fi
 
 after_success:
-  - ./gradlew uploadArchives -PnexusUsername="${nexusUsername}" -PnexusPassword="${nexusPassword}"
+  - if [[ $MAVEN == 'true' && $TRAVIS_BRANCH == 'dev' ]]; then ./gradlew uploadArchives -PnexusUsername="${nexusUsername}" -PnexusPassword="${nexusPassword}"
 
 notifications:
   email: false
