@@ -6,13 +6,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.ResultReceiver;
 
-@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
 /**
  * A Fragment class that handles saved states for ErgoResultReceivers.
  * Users implementing this class should override {@link #onCreateReceivers()} to provide their callbacks.
  * After that, an {@link InnerResultReceiver} can be gained by calling {@link #createResultReceiverForClass(Class)},
  * which can be used for {@link com.nhaarman.ergo.ErgoService}.
  */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ErgoFragment extends Fragment {
 
     private final ErgoHelper mErgoHelper = new ErgoHelper();
