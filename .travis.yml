@@ -35,7 +35,7 @@ script:
   - if [[ $LINT == 'true' ]]; then ./gradlew lint ; fi
 
 after_success:
-  - if [[ $MAVEN == 'true' && $TRAVIS_BRANCH == 'dev' ]]; then ./gradlew uploadArchives -PnexusUsername="${nexusUsername}" -PnexusPassword="${nexusPassword}"
+  - if [[ $MAVEN == 'true' && $TRAVIS_BRANCH == 'dev' ]]; then ./gradlew uploadArchives -PnexusUsername="${nexusUsername}" -PnexusPassword="${nexusPassword}" ; fi
 
 notifications:
   email: false
