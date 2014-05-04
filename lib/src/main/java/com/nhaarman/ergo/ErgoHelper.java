@@ -7,6 +7,12 @@ import android.os.ResultReceiver;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A helper class that handles saved states for ErgoResultReceivers.
+ * Users of this class should call {@link #setErgoReceivers(ErgoReceiver[])} to provide their callbacks.
+ * After that, an {@link InnerResultReceiver} can be gained by calling {@link #createResultReceiverForClass(Class)},
+ * which can be used for {@link com.nhaarman.ergo.ErgoService}.
+ */
 @SuppressWarnings("rawtypes")
 public class ErgoHelper {
 
