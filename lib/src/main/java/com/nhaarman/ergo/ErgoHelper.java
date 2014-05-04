@@ -60,11 +60,13 @@ public class ErgoHelper {
     }
 
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
-        for (Map.Entry<String, InnerReceiverWrapper<?>> entry : mReceiverMap.entrySet()) {
-            InnerResultReceiver resultReceiver = savedInstanceState.getParcelable(entry.getKey());
-            if (resultReceiver != null) {
-                mResultReceiverMap.put(entry.getKey(), resultReceiver);
-                resultReceiver.setReceiver(entry.getValue());
+        if (savedInstanceState != null) {
+            for (Map.Entry<String, InnerReceiverWrapper<?>> entry : mReceiverMap.entrySet()) {
+                InnerResultReceiver resultReceiver = savedInstanceState.getParcelable(entry.getKey());
+                if (resultReceiver != null) {
+                    mResultReceiverMap.put(entry.getKey(), resultReceiver);
+                    resultReceiver.setReceiver(entry.getValue());
+                }
             }
         }
     }
