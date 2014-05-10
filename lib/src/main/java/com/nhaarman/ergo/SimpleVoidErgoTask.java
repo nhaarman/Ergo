@@ -20,7 +20,7 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 
 /**
- * An ErgoTask which does not return anything, exception for a success or exception message.
+ * An ErgoTask which does not return anything, except for a success or exception message.
  * Handles notifying the ResultReceiver.
  */
 public abstract class SimpleVoidErgoTask extends ErgoTask<Void> {
@@ -30,6 +30,14 @@ public abstract class SimpleVoidErgoTask extends ErgoTask<Void> {
     @Override
     public void setResultReceiver(final ResultReceiver resultReceiver) {
         mResultReceiver = resultReceiver;
+    }
+
+    @Override
+    public void execute() {
+        if (mResultReceiver == null) {
+            throw new IllegalArgumentException("Provide a ResultReceiver!");
+        }
+        super.execute();
     }
 
     @Override
