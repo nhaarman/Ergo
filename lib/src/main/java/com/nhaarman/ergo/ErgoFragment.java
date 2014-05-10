@@ -1,5 +1,6 @@
 package com.nhaarman.ergo;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.util.Log;
  * which can be used for {@link com.nhaarman.ergo.ErgoService}.
  */
 @SuppressWarnings("rawtypes")
+@SuppressLint("ValidFragment")
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class ErgoFragment extends Fragment {
 
