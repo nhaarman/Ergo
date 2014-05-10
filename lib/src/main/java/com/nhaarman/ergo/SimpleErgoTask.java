@@ -29,11 +29,25 @@ public abstract class SimpleErgoTask<T extends Serializable> extends ErgoTask<T>
 
     private ResultReceiver mResultReceiver;
 
+    /**
+     * Sets the ResultReceiver which is notified. Must be called before {@link #execute()}, or an {@link java.lang.IllegalArgumentException} is thrown.
+     */
     @Override
     public void setResultReceiver(final ResultReceiver resultReceiver) {
         mResultReceiver = resultReceiver;
     }
 
+    @Override
+    public void execute() {
+        if (mResultReceiver == null) {
+            throw new IllegalArgumentException("Provide a ResultReceiver!");
+        }
+        super.execute();
+    }
+
+    /**
+     * Notifies the ResultReceiver of the success result, using {@link com.nhaarman.ergo.ErgoService#EXTRA_RESULT}.
+     */
     @Override
     protected void onSuccess(final T result) {
         Bundle resultData = new Bundle();
@@ -41,6 +55,9 @@ public abstract class SimpleErgoTask<T extends Serializable> extends ErgoTask<T>
         mResultReceiver.send(ErgoService.RESULT_OK, resultData);
     }
 
+    /**
+     * Notifies the ResultReceiver of the thrown Exception, using {@link com.nhaarman.ergo.ErgoService#EXTRA_EXCEPTION}.
+     */
     @Override
     protected void onException(final Exception e) {
         Bundle resultData = new Bundle();

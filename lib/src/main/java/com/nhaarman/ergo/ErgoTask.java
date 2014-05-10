@@ -9,6 +9,9 @@ import android.os.ResultReceiver;
 @SuppressWarnings({"ProhibitedExceptionDeclared", "ProhibitedExceptionThrown"})
 public abstract class ErgoTask<T> {
 
+    /**
+     * Calls {@link #call()}, and acts accordingly to its result.
+     */
     public void execute() {
         try {
             T result = call();
