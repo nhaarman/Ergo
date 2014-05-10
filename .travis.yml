@@ -3,16 +3,30 @@ jdk: oraclejdk7
 
 env:
   matrix:
-    - LINT=true MAVEN=true
+    - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a LINT=true MAVEN=true
   global:
     - TERM=dumb
     - secure: JSu0bJbR+ikwU7AdTfZtPDhTdKPKgdXkNLb3EyNwchJT1+o2/E0JnOi2T/hO+TKkGOv0r0RTcjapxuYOH1cGDy7zMfrHeSElMFyqO7ZjVCOhVH6ndjQrisqSUNMNZa39SDNH195DzGb9g160hWuK3cKWxHw6+m6wT11GHCeWN5I=
     - secure: CZ3B52muBIow9b1bhnNcLk1mSpHDAKgJx0IAq2IRjfC/p+LqlRicWO269n5jlRCQ0O6Nu5muzDvOS53YhyqEuOLnNcLv5XcBRdTyJ+OmvboqJEbmX4T80ZfczkQXfO0Jub32vibRYlgp3/4Pm/hIV0tC7VbAijJHplLDXg7tpY0=
 
+before_install:
+  - curl -3L -o wait_for_emulator https://github.com/embarkmobile/android-sdk-installer/raw/version-2/wait_for_emulator
+  - sudo chmod +x wait_for_emulator
+
+  # Start the emulator
+  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
+  - emulator -avd test -no-skin -no-audio -no-window &
+	
 install:
  - true
 
+before_script:
+  # Downloads gradle stuff
+  - gradle
+  - ./wait_for_emulator
+ 
 script:
+  - gradle connectedCheck
   - if [[ $LINT == 'true' ]]; then gradle lint ; fi
 
 after_success:
