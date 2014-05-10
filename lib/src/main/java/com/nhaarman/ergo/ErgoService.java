@@ -73,6 +73,15 @@ public abstract class ErgoService extends IntentService {
     }
 
     /**
+     * Returns whether the task has finished with an Exception.
+     * @param resultCode the result code received.
+     * @return true if the task has finished with an Exception.
+     */
+    public static boolean isException(final int resultCode){
+        return resultCode == RESULT_EXCEPTION;
+    }
+
+    /**
      * Returns the Exception that was thrown during execution of the task, if any.
      * @param resultData the result data received.
      * @return the Exception, or {@code null} if none.

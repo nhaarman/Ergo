@@ -42,9 +42,11 @@ class InnerReceiverWrapper<T> implements InnerReceiver {
         if (ErgoService.isSuccessFul(resultCode)) {
             T result = (T) resultData.getSerializable(ErgoService.EXTRA_RESULT);
             mErgoReceiver.onSuccess(result);
-        } else {
+        } else if (ErgoService.isException(resultCode)) {
             Exception e = ErgoService.getException(resultData);
             mErgoReceiver.onException(e);
+        } else {
+            throw new IllegalArgumentException("Invalid result code: " + resultCode);
         }
     }
 }
