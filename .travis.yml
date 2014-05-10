@@ -3,6 +3,7 @@ jdk: oraclejdk7
 
 env:
   matrix:
+    - ANDROID_TARGET=android-8  ANDROID_ABI=armeabi     LINT=false MAVEN=false JAVADOC=false
     - ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a LINT=true MAVEN=true
   global:
     - TERM=dumb
