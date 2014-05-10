@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * A helper class that handles saved states for ErgoResultReceivers.
- * Users of this class should register ErgoReceivers using {@link #registerReceiver(ErgoReceiver)} to provide their callbacks.
+ * Users of this class should register ErgoReceivers using {@link #registerErgoReceiver(ErgoReceiver)} to provide their callbacks.
  * After that, an {@link InnerResultReceiver} can be gained by calling {@link #createResultReceiverForClass(Class)},
  * which can be used for {@link com.nhaarman.ergo.ErgoService}.
  */
@@ -35,7 +35,7 @@ public class ErgoHelper {
      * @param ergoReceiver the ErgoReceiver to register.
      * @throws IllegalArgumentException if given ErgoReceiver class has already been registered.
      */
-    public void registerReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void registerErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
         if (mReceiverMap.containsKey(ergoReceiver.getClass().getName())) {
             throw new IllegalArgumentException("ErgoReceiver " + ergoReceiver.getClass().getName() + " has already been registered!");
         }
@@ -47,7 +47,7 @@ public class ErgoHelper {
      * It is not necessary to call this method upon end-of-life events.
      * @param ergoReceiver the ErgoReceiver to unregister.
      */
-    public void unregisterReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void unregisterErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
         mReceiverMap.remove(ergoReceiver.getClass().getName());
     }
 
@@ -57,7 +57,7 @@ public class ErgoHelper {
 
     /**
      * Creates a new {@link InnerResultReceiver} for given class.
-     * An instance of given class should have been registered in {@link #registerReceiver(ErgoReceiver)}, or an exception is thrown.
+     * An instance of given class should have been registered in {@link #registerErgoReceiver(ErgoReceiver)}, or an exception is thrown.
      * That instance will be the callback class for the ErgoResultReceiver returned.
      * @return an ErgoResultReceiver with the instance for given class as callback.
      */
