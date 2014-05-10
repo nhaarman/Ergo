@@ -19,6 +19,7 @@ package com.nhaarman.ergo;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.ResultReceiver;
+import android.util.Log;
 
 /**
  * An Activity class that handles saved states for ErgoResultReceivers.
@@ -34,20 +35,38 @@ public class ErgoActivity extends Activity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mErgoHelper.setErgoReceivers(onCreateReceivers());
+        onRegisterErgoReceivers();
     }
 
     /**
-     * Override this method to return your callback classes.
-     * @return an array of {@link InnerReceiverWrapper}s, which will be used for callbacks.
+     * Called after {@link #onCreate(android.os.Bundle)}.
+     * Override this method to register your {@link com.nhaarman.ergo.ErgoReceiver}s using {@link #registerErgoReceiver(ErgoReceiver)}.
      */
-    protected ErgoReceiver<?>[] onCreateReceivers() {
-        return new ErgoReceiver[0];
+    protected void onRegisterErgoReceivers() {
+        Log.w("Ergo", "ErgoActivity.onRegisterErgoReceivers() not overridden or super.onRegisterErgoReceivers() called. Override this method to register your ErgoReceivers!"); //NON-NLS
+    }
+
+    /**
+     * Registers an ErgoReceiver. Only one instance per ErgoReceiver class can be registered.
+     * @param ergoReceiver the ErgoReceiver to register.
+     * @throws IllegalArgumentException if given ErgoReceiver class has already been registered.
+     */
+    public void registerErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+        mErgoHelper.registerErgoReceiver(ergoReceiver);
+    }
+
+    /**
+     * Unregisters an ErgoReceiver.
+     * It is not necessary to call this method upon end-of-life events.
+     * @param ergoReceiver the ErgoReceiver to unregister.
+     */
+    public void unregisterErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+        mErgoHelper.unregisterErgoReceiver(ergoReceiver);
     }
 
     /**
      * Creates a new {@link InnerResultReceiver} for given class.
-     * An instance of given class should have been returned in {@link #onCreateReceivers()}, or an exception is thrown.
+     * An instance of given class should have been registered using {@link #registerErgoReceiver(ErgoReceiver)} ()}, or an exception is thrown.
      * That instance will be the callback class for the ErgoResultReceiver returned.
      * @return an ErgoResultReceiver with the instance for given class as callback.
      */

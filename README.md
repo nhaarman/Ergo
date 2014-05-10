@@ -23,7 +23,8 @@ dependencies {
 - Extend `ErgoService`
   - Implement `createTask(Intent)`
 - Extend `ErgoActivity` or `ErgoFragment`
-  - Implement `onCreateReceivers()`
+  - Implement `onRegisterReceivers()`, and register your `ErgoReceiver`s using `registerReceiver()`.
+  - Call `createResultReceiverForClass(Class)` to obtain a `ResultReceiver`.
   - Start your `ErgoService` using `ErgoService.startService(Context, Intent, ResultReceiver)`
 
 A code example will be available soon.
