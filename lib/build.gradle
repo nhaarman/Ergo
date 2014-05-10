@@ -1,6 +1,6 @@
 apply plugin: 'android-library'
 
-apply from: 'pushMaven.gradle'
+apply from: '../pushMaven.gradle'
 
 android {
     compileSdkVersion 19
