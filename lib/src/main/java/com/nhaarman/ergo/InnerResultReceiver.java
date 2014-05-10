@@ -46,6 +46,9 @@ class InnerResultReceiver extends ResultReceiver {
         mInnerReceiver = innerReceiver;
     }
 
+    /**
+     * Relays the result code and result data to the InnerReceiver if available.
+     */
     @Override
     protected void onReceiveResult(final int resultCode, final Bundle resultData) {
         if (mInnerReceiver != null) {

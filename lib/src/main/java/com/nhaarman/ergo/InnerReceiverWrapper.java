@@ -36,6 +36,14 @@ class InnerReceiverWrapper<T> implements InnerReceiver {
         mErgoReceiver = ergoReceiver;
     }
 
+    /**
+     * Notifies the ErgoHelper it's finished, and dispatches the success or exception to the ErgoReceiver.
+     * @param resultCode Arbitrary result code delivered by the sender, as
+     * defined by the sender. Must be one of {@link com.nhaarman.ergo.ErgoService#RESULT_OK} and {@link com.nhaarman.ergo.ErgoService#RESULT_EXCEPTION}.
+     * @param resultData Any additional data provided by the sender. Must contain a T under key {@link com.nhaarman.ergo.ErgoService#EXTRA_RESULT} if successful,
+     *                   or an Exception under key {@link com.nhaarman.ergo.ErgoService#EXTRA_EXCEPTION}.
+     * @throws java.lang.IllegalArgumentException if an invalid result code was given.
+     */
     @Override
     public final void onReceiveResult(final int resultCode, final Bundle resultData) {
         mErgoHelper.onFinishedForClass(mErgoReceiver.getClass());
