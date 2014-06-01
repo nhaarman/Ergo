@@ -83,6 +83,9 @@ public class ErgoHelper {
         return mResultReceiverMap.containsKey(receiverClass.getName());
     }
 
+    /**
+     * Restores saved ResultReceivers from the Bundle, as saved in {@link #onSaveInstanceState(android.os.Bundle)}.
+     */
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             for (Map.Entry<String, InnerReceiverWrapper<?>> entry : mReceiverMap.entrySet()) {
@@ -95,6 +98,9 @@ public class ErgoHelper {
         }
     }
 
+    /**
+     * Saves active ResultReceivers in given Bundle. Can be restored using {@link #onRestoreInstanceState(android.os.Bundle)}.
+     */
     protected void onSaveInstanceState(final Bundle outState) {
         for (Map.Entry<String, InnerResultReceiver> entry : mResultReceiverMap.entrySet()) {
             outState.putParcelable(entry.getKey(), entry.getValue());

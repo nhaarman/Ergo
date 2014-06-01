@@ -23,7 +23,7 @@ import android.util.Log;
 
 /**
  * An Activity class that handles saved states for ErgoResultReceivers.
- * Users implementing this class should override {@link #onCreateReceivers()} to provide their callbacks.
+ * Users implementing this class should override {@link #onRegisterErgoReceivers()} to provide their callbacks.
  * After that, an {@link InnerResultReceiver} can be gained by calling {@link #createResultReceiverForClass(Class)},
  * which can be used for {@link com.nhaarman.ergo.ErgoService}.
  */
