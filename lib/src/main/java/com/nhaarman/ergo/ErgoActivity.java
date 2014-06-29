@@ -51,7 +51,7 @@ public class ErgoActivity extends Activity {
      * @param ergoReceiver the ErgoReceiver to register.
      * @throws IllegalArgumentException if given ErgoReceiver class has already been registered.
      */
-    public void registerErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void registerErgoReceiver(final ErgoReceiver ergoReceiver) {
         mErgoHelper.registerErgoReceiver(ergoReceiver);
     }
 
@@ -60,13 +60,13 @@ public class ErgoActivity extends Activity {
      * It is not necessary to call this method upon end-of-life events.
      * @param ergoReceiver the ErgoReceiver to unregister.
      */
-    public void unregisterErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void unregisterErgoReceiver(final ErgoReceiver ergoReceiver) {
         mErgoHelper.unregisterErgoReceiver(ergoReceiver);
     }
 
     /**
      * Creates a new {@link InnerResultReceiver} for given class.
-     * An instance of given class should have been registered using {@link #registerErgoReceiver(ErgoReceiver)} ()}, or an exception is thrown.
+     * An instance of given class should have been registered using {@link #registerErgoReceiver(ErgoReceiver)}, or an exception is thrown.
      * That instance will be the callback class for the ErgoResultReceiver returned.
      * @return an ErgoResultReceiver with the instance for given class as callback.
      */

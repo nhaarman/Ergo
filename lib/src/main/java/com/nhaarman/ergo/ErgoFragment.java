@@ -39,7 +39,7 @@ public class ErgoFragment extends Fragment {
      * @param ergoReceiver the ErgoReceiver to register.
      * @throws IllegalArgumentException if given ErgoReceiver class has already been registered.
      */
-    public void registerErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void registerErgoReceiver(final ErgoReceiver ergoReceiver) {
         mErgoHelper.registerErgoReceiver(ergoReceiver);
     }
 
@@ -48,7 +48,7 @@ public class ErgoFragment extends Fragment {
      * It is not necessary to call this method upon end-of-life events.
      * @param ergoReceiver the ErgoReceiver to unregister.
      */
-    public void unregisterErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void unregisterErgoReceiver(final ErgoReceiver ergoReceiver) {
         mErgoHelper.unregisterErgoReceiver(ergoReceiver);
     }
 

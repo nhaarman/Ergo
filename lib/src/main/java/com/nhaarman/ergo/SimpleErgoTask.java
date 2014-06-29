@@ -23,9 +23,8 @@ import java.io.Serializable;
 
 /**
  * An ErgoTask which delivers results to a ResultReceiver.
- * @param <T> the return type.
  */
-public abstract class SimpleErgoTask<T extends Serializable> extends ErgoTask<T> {
+public abstract class SimpleErgoTask extends ErgoTask {
 
     private ResultReceiver mResultReceiver;
 
@@ -35,9 +34,8 @@ public abstract class SimpleErgoTask<T extends Serializable> extends ErgoTask<T>
     }
 
     @Override
-    protected void onSuccess(final T result) {
+    protected void onSuccess() {
         Bundle resultData = new Bundle();
-        resultData.putSerializable(ErgoService.EXTRA_RESULT, result);
         mResultReceiver.send(ErgoService.RESULT_OK, resultData);
     }
 

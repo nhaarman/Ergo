@@ -22,16 +22,17 @@ import android.os.Bundle;
  * An ErgoReceiver which handles communication with the ErgoActivity for you,
  * and figures out whether the task has finished successfully.
  */
-class InnerReceiverWrapper<T> implements InnerReceiver {
+class InnerReceiverWrapper implements InnerReceiver {
 
     private final ErgoHelper mErgoHelper;
-    private final ErgoReceiver<T> mErgoReceiver;
+    private final ErgoReceiver mErgoReceiver;
 
     /**
      * Creates a new SimpleReceiver.
+     *
      * @param ergoHelper the containing ErgoHelper.
      */
-    protected InnerReceiverWrapper(final ErgoHelper ergoHelper, final ErgoReceiver<T> ergoReceiver) {
+    protected InnerReceiverWrapper(final ErgoHelper ergoHelper, final ErgoReceiver ergoReceiver) {
         mErgoHelper = ergoHelper;
         mErgoReceiver = ergoReceiver;
     }
@@ -40,8 +41,7 @@ class InnerReceiverWrapper<T> implements InnerReceiver {
     public final void onReceiveResult(final int resultCode, final Bundle resultData) {
         mErgoHelper.onFinishedForClass(mErgoReceiver.getClass());
         if (ErgoService.isSuccessFul(resultCode)) {
-            T result = (T) resultData.getSerializable(ErgoService.EXTRA_RESULT);
-            mErgoReceiver.onSuccess(result);
+            mErgoReceiver.onSuccess();
         } else {
             Exception e = ErgoService.getException(resultData);
             mErgoReceiver.onException(e);

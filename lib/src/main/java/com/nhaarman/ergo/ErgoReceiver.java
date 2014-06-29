@@ -1,8 +1,8 @@
 package com.nhaarman.ergo;
 
-public interface ErgoReceiver<T> {
+public interface ErgoReceiver {
 
-    void onSuccess(T result);
+    void onSuccess();
 
     void onException(Exception e);
 

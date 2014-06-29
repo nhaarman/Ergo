@@ -20,7 +20,7 @@ public class ErgoHelper {
      * The registered ErgoReceivers, wrapped in an InnerReceiverWrapper.
      * Key: ErgoReceiver.getClass().getName().
      */
-    private final Map<String, InnerReceiverWrapper<?>> mReceiverMap = new HashMap<>(3);
+    private final Map<String, InnerReceiverWrapper> mReceiverMap = new HashMap<>(3);
 
     /**
      * The active InnerResultReceivers, which are returned from {@link #createResultReceiverForClass(Class)}.
@@ -32,10 +32,12 @@ public class ErgoHelper {
 
     /**
      * Registers an ErgoReceiver. Only one instance per ErgoReceiver class can be registered.
+     *
      * @param ergoReceiver the ErgoReceiver to register.
+     *
      * @throws IllegalArgumentException if given ErgoReceiver class has already been registered.
      */
-    public void registerErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void registerErgoReceiver(final ErgoReceiver ergoReceiver) {
         if (mReceiverMap.containsKey(ergoReceiver.getClass().getName())) {
             throw new IllegalArgumentException("ErgoReceiver " + ergoReceiver.getClass().getName() + " has already been registered!");
         }
@@ -45,20 +47,22 @@ public class ErgoHelper {
     /**
      * Unregisters an ErgoReceiver.
      * It is not necessary to call this method upon end-of-life events.
+     *
      * @param ergoReceiver the ErgoReceiver to unregister.
      */
-    public void unregisterErgoReceiver(final ErgoReceiver<?> ergoReceiver) {
+    public void unregisterErgoReceiver(final ErgoReceiver ergoReceiver) {
         mReceiverMap.remove(ergoReceiver.getClass().getName());
     }
 
-    private <T> InnerReceiverWrapper<T> wrap(final ErgoReceiver<T> receiver) {
-        return new InnerReceiverWrapper<>(this, receiver);
+    private InnerReceiverWrapper wrap(final ErgoReceiver receiver) {
+        return new InnerReceiverWrapper(this, receiver);
     }
 
     /**
      * Creates a new {@link InnerResultReceiver} for given class.
      * An instance of given class should have been registered in {@link #registerErgoReceiver(ErgoReceiver)}, or an exception is thrown.
      * That instance will be the callback class for the ErgoResultReceiver returned.
+     *
      * @return an ErgoResultReceiver with the instance for given class as callback.
      */
     protected ResultReceiver createResultReceiverForClass(final Class<? extends ErgoReceiver> receiverClass) {
@@ -77,6 +81,7 @@ public class ErgoHelper {
 
     /**
      * Returns whether the task for given class is still active.
+     *
      * @return true if it is active.
      */
     protected boolean isActive(final Class<? extends ErgoReceiver> receiverClass) {
@@ -85,7 +90,7 @@ public class ErgoHelper {
 
     protected void onRestoreInstanceState(final Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            for (Map.Entry<String, InnerReceiverWrapper<?>> entry : mReceiverMap.entrySet()) {
+            for (Map.Entry<String, InnerReceiverWrapper> entry : mReceiverMap.entrySet()) {
                 InnerResultReceiver resultReceiver = savedInstanceState.getParcelable(entry.getKey());
                 if (resultReceiver != null) {
                     mResultReceiverMap.put(entry.getKey(), resultReceiver);

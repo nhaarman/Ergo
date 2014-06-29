@@ -4,15 +4,14 @@ import android.os.ResultReceiver;
 
 /**
  * A class for executing tasks, with success and exception callbacks.
- * @param <T> the return type.
  */
 @SuppressWarnings({"ProhibitedExceptionDeclared", "ProhibitedExceptionThrown"})
-public abstract class ErgoTask<T> {
+public abstract class ErgoTask {
 
     public void execute() {
         try {
-            T result = call();
-            onSuccess(result);
+            call();
+            onSuccess();
         } catch (RuntimeException e) {
             throw e;
         } catch (Exception e) {
@@ -22,9 +21,9 @@ public abstract class ErgoTask<T> {
 
     public abstract void setResultReceiver(ResultReceiver resultReceiver);
 
-    protected abstract T call() throws Exception;
+    protected abstract void call() throws Exception;
 
-    protected abstract void onSuccess(T result);
+    protected abstract void onSuccess();
 
     protected abstract void onException(Exception e);
 

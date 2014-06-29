@@ -24,11 +24,11 @@ import android.os.ResultReceiver;
 
 /**
  * <p>
- *     An IntentService used to perform simple tasks which may yield in a result or an Exception.
+ * An IntentService used to perform simple tasks which may yield in a result or an Exception.
  * </p>
  * <p>
- *     To start an instance of (a subclass) of this class, call {@link #startService(android.content.Context, android.content.Intent, android.os.ResultReceiver)}.
- *     Users overriding {@link #onHandleIntent(android.content.Intent)} should call {@code super.onHandleIntent(Intent)}.
+ * To start an instance of (a subclass) of this class, call {@link #startService(android.content.Context, android.content.Intent, android.os.ResultReceiver)}.
+ * Users overriding {@link #onHandleIntent(android.content.Intent)} should call {@code super.onHandleIntent(Intent)}.
  * </p>
  */
 public abstract class ErgoService extends IntentService {
@@ -37,11 +37,10 @@ public abstract class ErgoService extends IntentService {
     static final int RESULT_EXCEPTION = -1;
 
     static final String EXTRA_RESULTRECEIVER = ErgoService.class.getName() + ".extra_resultreceiver";
-    static final String EXTRA_RESULT = ErgoService.class.getName() + ".extra_result";
     static final String EXTRA_EXCEPTION = ErgoService.class.getName() + ".extra_exception";
 
     /**
-     * Creates an IntentService.  Invoked by your subclass's constructor.
+     * Creates an IntentService. Invoked by your subclass's constructor.
      *
      * @param name Used to name the worker thread, important only for debugging.
      */
@@ -53,8 +52,8 @@ public abstract class ErgoService extends IntentService {
      * Use this method to start an instance of your Service.
      * If you start a subclass of BaseIntentService without calling this method, an exception is thrown.
      *
-     * @param context the Context starting the Service.
-     * @param intent the Intent containing the Service to start and possibly some extras.
+     * @param context        the Context starting the Service.
+     * @param intent         the Intent containing the Service to start and possibly some extras.
      * @param resultReceiver the ResultReceiver which will be notified at the end of execution.
      */
     @SuppressWarnings("TypeMayBeWeakened")
@@ -65,7 +64,9 @@ public abstract class ErgoService extends IntentService {
 
     /**
      * Returns whether the task has finished successfully.
+     *
      * @param resultCode the result code received.
+     *
      * @return true if the task has finished successfully.
      */
     public static boolean isSuccessFul(final int resultCode) {
@@ -74,7 +75,9 @@ public abstract class ErgoService extends IntentService {
 
     /**
      * Returns the Exception that was thrown during execution of the task, if any.
+     *
      * @param resultData the result data received.
+     *
      * @return the Exception, or {@code null} if none.
      */
     public static Exception getException(final Bundle resultData) {
@@ -90,7 +93,7 @@ public abstract class ErgoService extends IntentService {
      * the same IntentService, but it will not hold up anything else.
      * When all requests have been handled, the IntentService stops itself,
      * so you should not call {@link #stopSelf}.
-     *
+     * <p/>
      * <p><em>Derived classes must call through to the super class's
      * implementation of this method.  If they do not, an exception will be
      * thrown.</em></p>
@@ -105,7 +108,7 @@ public abstract class ErgoService extends IntentService {
             throw new IllegalArgumentException("Invalid ResultReceiver. Did you call startService(Context, Intent, ResultReceiver)?");
         }
 
-        ErgoTask<?> ergoTask = createTask(intent);
+        ErgoTask ergoTask = createTask(intent);
         ergoTask.setResultReceiver(resultReceiver);
         ergoTask.execute();
     }
@@ -116,6 +119,6 @@ public abstract class ErgoService extends IntentService {
      *
      * @param intent the Intent containing the Service to start and possibly some extras, as originally passed to {@link #onHandleIntent(android.content.Intent)}.
      */
-    protected abstract ErgoTask<?> createTask(final Intent intent);
+    protected abstract ErgoTask createTask(final Intent intent);
 
 }
