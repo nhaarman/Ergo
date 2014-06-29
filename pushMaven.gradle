@@ -60,19 +60,17 @@ afterEvaluate { project ->
     }
 
     task androidJavadocs(type: Javadoc) {
-        source = android.sourceSets.main.allJava
+        source = android.sourceSets.main.java
     }
 
     task androidJavadocsJar(type: Jar) {
         classifier = 'javadoc'
-        //basename = artifact_id
         from androidJavadocs.destinationDir
     }
 
     task androidSourcesJar(type: Jar) {
         classifier = 'sources'
-        //basename = artifact_id
-        from android.sourceSets.main.allSource
+        from android.sourceSets.main.java.sourceFiles
     }
 
     task coreLibJar(type: Jar) {

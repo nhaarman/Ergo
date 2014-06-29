@@ -1,10 +1,10 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 apply from: '../pushMaven.gradle'
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "20.0.0"
 
     defaultConfig {
         minSdkVersion 8
