@@ -74,7 +74,7 @@ afterEvaluate { project ->
     }
 
     task coreLibJar(type: Jar) {
-        from fileTree(dir: 'build/classes/release').matching { include 'com/nhaarman/ergo/**' }
+        from fileTree(dir: './build/intermediates/classes/release').matching { include 'com/nhaarman/ergo/**' }
     }
 
     artifacts {
